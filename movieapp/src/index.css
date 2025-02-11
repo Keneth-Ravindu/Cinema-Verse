@@ -112,7 +112,7 @@
     }
 
     & ul {
-      @apply grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+      @apply grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 scroll-mt-2.5;
     }
   }
 
