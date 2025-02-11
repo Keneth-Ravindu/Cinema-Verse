@@ -95,7 +95,7 @@
 
    
     & input::placeholder {
-      @apply font-heading transition-all duration-300;
+      @apply font-heading transition-all duration-300 text-sky-400/75;
     }
 
     & input:focus::placeholder {

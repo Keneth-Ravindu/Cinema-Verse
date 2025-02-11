@@ -70,7 +70,6 @@ const App = () => {
             Cinema Verse
           </h1>
           <img src="./hero.png" alt="banner" /><br /><br />
-          
           <h1>
             Search your Favorite Movies &
             checkout their  popularity.
@@ -79,7 +78,7 @@ const App = () => {
         </header>
 
         <section className="all-movies">
-          <h2 className="mt-[40px] text-center text-3xl font-bold bg-gradient-to-r from-red-500 to-white bg-clip-text text-transparent">
+          <h2 className="mt-[10px] text-center text-3xl font-bold bg-gradient-to-r from-red-500 to-white bg-clip-text text-transparent">
           All Movies
           </h2>
 
