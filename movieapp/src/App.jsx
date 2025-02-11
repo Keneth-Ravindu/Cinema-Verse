@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Search from "./Components/Search";
 import Spinner from "./Components/Spinner";
 import MovieCard from "./Components/MovieCard";
+import { useDebounce } from "react-use";
+
 
 const API_BASE_URL = "https://api.themoviedb.org/3"; // Correct API URL
 
@@ -20,6 +22,9 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [movieList, setMovieList] = useState([]); // Fixed syntax
   const [isLoading, setIsLoading] = useState(false);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+
+  useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm])
 
   const fetchMovies = async (query = '') => {
     setIsLoading(true);
@@ -30,7 +35,9 @@ const App = () => {
         throw new Error("API Key is missing. Please check your environment variables.");
       }
 
-      const endpoint = `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+      const endpoint = query
+      ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+      : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
       const response = await fetch(endpoint, API_OPTIONS);
 
@@ -51,24 +58,27 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchMovies(searchTerm);
-  }, [searchTerm]);
+    fetchMovies(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
 
   return (
     <main>
       <div className="pattern" />
       <div className="wrapper">
         <header>
-          <img src="./hero.png" alt="banner" />
+          <img src="./hero.png" alt="banner" /><br /><br />
           <h1>
-            Discover Your Favorite <span className="text-gradient">Movies</span> And
-            Enjoy the Quality
+            <span className="text-gradient">Search</span> your  <span className="text-gradient">Favorite Movies</span> &
+            checkout their  <span className="text-gradient">popularity</span>.
           </h1>
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </header>
 
         <section className="all-movies">
-          <h2 className="mt-[40px]">All Movies</h2>
+          <h2 className="mt-[40px] text-center text-3xl font-bold bg-gradient-to-r from-red-500 to-white bg-clip-text text-transparent">
+          All Movies
+          </h2>
+
           {isLoading ? (
             <Spinner />
           ) : errorMessage ? (
