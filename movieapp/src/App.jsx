@@ -66,7 +66,11 @@ const App = () => {
       <div className="pattern" />
       <div className="wrapper">
         <header>
+          <h1 className="mb-10 text-center text-6xl font-bold bg-gradient-to-r from-red-500 to-yellow-400 bg-clip-text text-transparent">
+            Cinema Verse
+          </h1>
           <img src="./hero.png" alt="banner" /><br /><br />
+          
           <h1>
             Search your Favorite Movies &
             checkout their  popularity.
